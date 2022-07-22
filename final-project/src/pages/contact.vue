@@ -29,7 +29,7 @@
           Por favor, introduce tus datos y te responderemos tan pronto nos sea
           posible.
         </h6>
-        <h6>{{data.date}}</h6>
+        <h6>{{ data.date }}</h6>
         <div class="q-gutter-sm q-ma-sm">
           <q-radio
             v-model="data.coment"
@@ -68,21 +68,18 @@
               outlined
               v-model="data.nombre"
               label="Nombre"
-              :dense="dense"
               class="q-ma-sm"
             />
             <q-input
               outlined
               v-model="data.apellidos"
               label="Apellidos"
-              :dense="dense"
               class="q-ma-sm"
             />
             <q-input
               outlined
               v-model="data.direccion"
               label="Direccion Particular"
-              :dense="dense"
               class="q-ma-sm"
             />
             <q-input
@@ -90,34 +87,32 @@
               v-model="data.correo"
               label="Correo Electronico"
               type="email"
-              :dense="dense"
               class="q-ma-sm"
             />
             <q-input
-              outlined
+              filled
               v-model="data.telefono"
-              label="Telefono de Contacto"
-              type="tel"
-              :dense="dense"
-              class="q-ma-sm"
+              label="Phone"
+              mask="(###) ### - ####"
+              hint="Mask: (###) ### - ####"
             />
           </div>
         </div>
-        <q-input v-model="data.planteamineto" filled type="textarea" class="q-ma-sm" />
-        <q-btn
-          color="primary"
-          label="Enviar"
+        <q-input
+          v-model="data.planteamineto"
+          filled
+          type="textarea"
           class="q-ma-sm"
-          @click="enviar"
         />
+        <q-btn color="primary" label="Enviar" class="q-ma-sm" @click="enviar" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { ref, reactive,onMounted } from "vue";
-import { useQuasar ,} from "quasar";
+import { ref, reactive, onMounted } from "vue";
+import { useQuasar } from "quasar";
 export default {
   setup() {
     const $q = useQuasar();
@@ -129,29 +124,77 @@ export default {
       apellidos: "",
       direccion: "",
       correo: "",
-      telefono:"",
+      telefono: "",
       planteamineto: "",
     });
 
     function enviar(params) {
-      $q.notify({ color: "positive", message: "Mensaje enviado, pronto le responderemos", icon: "done" });
-      data.coment=""
-      data.anonim=""
-      data.nombre= ""
-      data.apellidos= ""
-      data.direccion= ""
-      data.correo= ""
-      data.telefono=""
-      data.planteamineto= ""
+      var validRegex =
+        /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+        if(data.coment=="queja"&&data.anonim=="personal"){
+          if (data.correo.match(validRegex) && data.nombre!="" && data.apellidos!="" && data.direccion!="" && data.telefono!="") {
+            $q.notify({
+              color: "positive",
+              message: "Mensaje enviado, pronto le responderemos",
+              icon: "done",
+            });
+            data.coment = "";
+            data.anonim = "";
+            data.nombre = "";
+            data.apellidos = "";
+            data.direccion = "";
+            data.correo = "";
+            data.telefono = "";
+            data.planteamineto = "";
+          }
+          else if(!data.correo.match(validRegex)){
+            $q.notify({
+              color: "negative",
+              message: "La direccion de correo electronico tiene un formato incorreto",
+              icon: "danger",
+            });
+          }
+          else{
+            $q.notify({
+              color: "negative",
+              message: "Todos los campos han de ser llenados",
+              icon: "danger",
+            });
+          }
+        }
+        else if(data.coment="comentario" || data.anonim=="anonima"){
+          if(data.planteamineto!=""){
+            $q.notify({
+              color: "positive",
+              message: "Mensaje enviado, pronto le responderemos",
+              icon: "done",
+            });
+            data.coment = "";
+            data.anonim = "";
+            data.planteamineto = "";
+          }
+          else{
+            $q.notify({
+              color: "negative",
+              message: "Todos los campos han de ser llenados",
+              icon: "danger",
+            });
+          }
+        }
     }
-     onMounted(() => {
-         let today=new Date()
-         data.date=today.getDate()+"-"+(today.getMonth()+1)+"-"+today.getFullYear();
-     })
+    onMounted(() => {
+      let today = new Date();
+      data.date =
+        today.getDate() +
+        "-" +
+        (today.getMonth() + 1) +
+        "-" +
+        today.getFullYear();
+    });
 
     return {
       data,
-      enviar
+      enviar,
     };
   },
 };
