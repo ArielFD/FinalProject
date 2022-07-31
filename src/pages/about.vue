@@ -2,12 +2,12 @@
   <div class="text-primary">
     <div class="row">
       <div class="col-4 q-pa-md">
-        <h5>Mision</h5>
+        <h5>Misión</h5>
         Proporcionar a la sociedad, servicios y productos relacionados con el
         hogar.
       </div>
       <div class="col-8 q-pa-md">
-        <h5>Vision</h5>
+        <h5>Visión</h5>
         Somos una organización reconocida por la calidad y el alto valor
         agregado de los servicios y productos que se ofertan. Contamos con una
         red de instalaciones distribuidas por todo el país y un capital humano
@@ -70,7 +70,7 @@
         <q-avatar>
           <q-icon name="email" />
         </q-avatar>
-        Servicio de mensajeria
+        Servicio de mensajería
         <br />
         <q-avatar>
           <q-icon name="public" />

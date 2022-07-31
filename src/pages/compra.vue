@@ -16,7 +16,7 @@
         <q-btn
           color="primary"
           text-color="white"
-          label="gregar a la cesta"
+          label="agregar a la cesta"
           class="q-pl-xl q-pr-xl"
           icon="shopping_cart"
           @click="aumentar"

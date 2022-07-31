@@ -19,7 +19,7 @@
         </q-btn>
       </q-toolbar>
       <q-toolbar style="background-color: rgb(235,241,229); color: rgb(0, 56, 44)">
-        <q-toolbar-title> Tienda de Muebles </q-toolbar-title>
+        <q-toolbar-title> Inmobilaria Borrego </q-toolbar-title>
 
         <q-btn flat color="primary" label="Inicio" :to="{ name: 'inicio' }"/>
         <q-btn flat color="primary" label="Productos" :to="{ name: 'productos' }"/>

@@ -46,7 +46,7 @@
             label="Queja"
           />
         </div>
-        <div v-if="data.coment == 'queja'">
+        <div v-if="data.coment === 'queja'">
           <div class="q-gutter-sm q-ma-sm">
             <q-radio
               v-model="data.anonim"
@@ -63,7 +63,7 @@
               label="Personal"
             />
           </div>
-          <div v-if="data.anonim == 'personal'">
+          <div v-if="data.anonim === 'personal'">
             <q-input
               outlined
               v-model="data.nombre"
@@ -162,8 +162,8 @@ export default {
             });
           }
         }
-        else if(data.coment="comentario" || data.anonim=="anonima"){
-          if(data.planteamineto!=""){
+        else if(data.coment === "comentario" || data.anonim === "anonima"){
+          if(data.planteamineto!==""){
             $q.notify({
               color: "positive",
               message: "Mensaje enviado, pronto le responderemos",
